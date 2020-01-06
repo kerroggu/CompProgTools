@@ -2,7 +2,7 @@ import time
 import json
 import requests
 
-members=['keroru','Kiri8128']
+members=['keroru']
 start_date,end_date="2019/1/1","2020/1/1"
 
 def get_acp_info(name): # Get time-based submission information from AtCoder Problems API, [name] = atcoder user name
