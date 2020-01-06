@@ -15,6 +15,7 @@ def ac_in_period(submissions,begin,end,t_format="%Y/%m/%d"): # Get AC count duri
     t_e=time.strptime(end,t_format)
 
     results={}
+    points={}
     dict_result={'WA':0,'AC':1,'TLE':2,'MLE':3,'RE':4,'CE':5,"OLE":6}
 
     for sbm in submissions:
@@ -31,19 +32,22 @@ def ac_in_period(submissions,begin,end,t_format="%Y/%m/%d"): # Get AC count duri
             continue
 
         if pid in results:
+            points[pid]=max(points[pid],point)
             if dict_result[res]==1:
                 results[pid]=1
         else:
+            points[pid]=point
             if dict_result[res]==1:
                 results[pid]=1
             else:
                 results[pid]=0
     
-    total_ac=0
+    total_ac,total_point=0,0
     for pid,ac_cnt in results.items():
         total_ac+=ac_cnt
-    
-    return total_ac
+    for pid,earned_point in points.items():
+        total_point+=earned_point
+    return total_ac,total_point
 
 
 txts=[]
@@ -52,7 +56,6 @@ for m in members:
 
 for i in range(len(members)):
     submissions=json.loads(txts[i])
-    ac=ac_in_period(submissions,start_date,end_date)
+    ac,points=ac_in_period(submissions,start_date,end_date)
 
-    print(members[i],":",ac,"ACs from ",start_date,"to",end_date)
-    
+    print(members[i],":",ac,"ACs, ",'{:,}'.format(int(points)),"points","from ",start_date,"to",end_date)
