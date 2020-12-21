@@ -32,7 +32,7 @@ def ac_in_period(submissions,begin,end,t_format="%Y/%m/%d"): # Get AC count duri
     results={}
     points={}
     difficulties={}
-    dict_result={'WA':0,'AC':1,'TLE':2,'MLE':3,'RE':4,'CE':5,"OLE":6}
+    dict_result={'WA':0,'AC':1,'TLE':2,'MLE':3,'RE':4,'CE':5,"OLE":6,"QLE":7}
 
     for sbm in submissions:
         t=sbm['epoch_second']
